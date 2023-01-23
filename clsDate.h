@@ -22,6 +22,18 @@ public:
         _month=to_string(month);
         _year=to_string(year);
     }
+        clsDate(short day, short month, short year)
+    {
+        if (0<day && day<=31)
+        {
+            _day=to_string(day);
+        }
+        if (0<month && month<=12)
+        {
+            _month=to_string(month);
+        }
+        _year=to_string(year);
+    }
     void set_day(short day)
     {
 
