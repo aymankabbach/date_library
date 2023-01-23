@@ -1,26 +1,40 @@
 #pragma once
 #include <iostream>
+#include <time.h>
+#include <string>
 using namespace std;
 
 class clsDate
 {
 private:
-    short _day=0;
-    short _month=0;
-    short _year=0;
+    string _day="";
+    string _month="";
+    string _year="";
 public:
+    clsDate()
+    {
+        time_t theTime = time(NULL);
+        struct tm *aTime = localtime(&theTime);
+        int day = aTime->tm_mday;
+        int month = aTime->tm_mon + 1;
+        int year = aTime->tm_year + 1900;
+        _day=to_string(day);
+        _month=to_string(month);
+        _year=to_string(year);
+    }
     void set_day(short day)
     {
+
         if (0<day && day<=31)
         { 
-            _day=day;
+            _day=to_string(day);
         }
         else
         {
-            cout<<day<<" is invalid"<<endl;
+            cout<<"day "<<day<<" is invalid"<<endl;
         }
     }
-    short get_day()
+    string get_day()
     {
         return _day;
     }
@@ -28,23 +42,37 @@ public:
     {
         if (0<month && month<=12)
         { 
-            _month=month;
+            _month=to_string(month);
         }
         else
         {
-            cout<<month<<" is invalid"<<endl;
+            cout<<"month "<<month<<" is invalid"<<endl;
         }
     }
-    short get_month()
+    string get_month()
     {
         return _month;
     }
     void set_year(short year)
     {
-        _year=year;
+        _year=to_string(year);
     }
-    short get_year()
+    string get_year()
     {
         return _year;
+    }
+    void get_date()
+    {
+        string day=get_day();
+        string month=get_month();
+        string year=get_year();
+        if (day=="" || month=="" || year=="")
+        {
+            cout<<"there is no valid date yet"<<endl;
+        }
+        else
+        {
+            cout<<day<<"/"<<month<<"/"<<year<<endl;   
+        }
     }
 };
