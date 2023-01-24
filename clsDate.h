@@ -7,17 +7,17 @@ using namespace std;
 class clsDate
 {
 private:
-    short _day=1;
-    short _month=1;
-    short _year=1900;
+    short _day;
+    short _month;
+    short _year;
 public:
     clsDate()
     {
         time_t theTime = time(NULL);
         struct tm *aTime = localtime(&theTime);
-        int day = aTime->tm_mday;
-        int month = aTime->tm_mon + 1;
-        int year = aTime->tm_year + 1900;
+        short day = aTime->tm_mday;
+        short month = aTime->tm_mon + 1;
+        short year = aTime->tm_year + 1900;
         _day=day;
         _month=month;
         _year=year;
@@ -112,5 +112,32 @@ public:
     void get_date()
     {
         cout<<get_day()<<"/"<<get_month()<<"/"<<get_year()<<endl;
+    }
+    short getagebydays(short day,short month, short year)
+    {
+        short days=0;
+        vector <short> Days_in_Months={31,28,31,30,31,30,31,31,30,31,30,31};
+        time_t theTime = time(NULL);
+        struct tm *aTime = localtime(&theTime);
+        short current_day = aTime->tm_mday;
+        short current_month = aTime->tm_mon + 1;
+        short current_year = aTime->tm_year + 1900;
+        /* */
+        days+=Days_in_Months[month-1]-day;
+        for (short x=month ; x<Days_in_Months.size(); x++)
+        {
+            days+=Days_in_Months[x];
+
+        }
+        for (short x=year; x<current_year-1;x++)
+        {
+            days+=365;
+        }
+        for (short x=0 ; x<current_month-1; x++)
+        {
+            days+=Days_in_Months[x];
+        }
+        days+=current_day;
+        return days;
     }
 };

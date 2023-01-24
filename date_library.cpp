@@ -4,8 +4,8 @@ using namespace std;
 
 int main()
 {
-    clsDate Date("31/2/2018");
-    Date.get_date();
+    clsDate Date;
+    cout<<Date.getagebydays(9,2,1980)<<endl;
     system("pause");
     return 0;
 }
