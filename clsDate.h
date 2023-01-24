@@ -1,15 +1,15 @@
 #pragma once
 #include <iostream>
 #include <time.h>
-#include <string>
+#include <vector>
 using namespace std;
 
 class clsDate
 {
 private:
-    string _day="";
-    string _month="";
-    string _year="";
+    short _day=1;
+    short _month=1;
+    short _year=1900;
 public:
     clsDate()
     {
@@ -18,35 +18,71 @@ public:
         int day = aTime->tm_mday;
         int month = aTime->tm_mon + 1;
         int year = aTime->tm_year + 1900;
-        _day=to_string(day);
-        _month=to_string(month);
-        _year=to_string(year);
+        _day=day;
+        _month=month;
+        _year=year;
     }
-        clsDate(short day, short month, short year)
+    clsDate(short day, short month, short year)
     {
         if (0<day && day<=31)
         {
-            _day=to_string(day);
+            _day=day;
         }
         if (0<month && month<=12)
         {
-            _month=to_string(month);
+            _month=month;
         }
-        _year=to_string(year);
+        _year=year;
+    }
+    clsDate(short days,short year)
+    {
+        vector <short> Days_in_Months={31,28,31,30,31,30,31,31,30,31,30,31};
+        short months=0;
+        while (days>0 && days>Days_in_Months[months])
+        {
+            days-=Days_in_Months[months];
+            months++;
+        }
+        _day=days;
+        _month=months+1;
+        _year=year;
+    }
+    clsDate(string date)
+    {
+        vector <string> vSplit_date;
+        string sword;
+        string delim="/";
+        short pos=0;
+        while ((pos = date.find(delim)) != std::string::npos)
+        {
+            sword=date.substr(0,pos);
+            if (sword!="")
+            {
+                vSplit_date.push_back(sword);
+            }
+            date.erase(0,pos+delim.length());
+        }
+        if (date!="")
+        {
+            vSplit_date.push_back(date);
+        }
+        _day=stoi(vSplit_date[0]);
+        _month=stoi(vSplit_date[1]);
+        _year=stoi(vSplit_date[2]);
     }
     void set_day(short day)
     {
 
         if (0<day && day<=31)
         { 
-            _day=to_string(day);
+            _day=day;
         }
         else
         {
             cout<<"day "<<day<<" is invalid"<<endl;
         }
     }
-    string get_day()
+    short get_day()
     {
         return _day;
     }
@@ -54,37 +90,27 @@ public:
     {
         if (0<month && month<=12)
         { 
-            _month=to_string(month);
+            _month=month;
         }
         else
         {
             cout<<"month "<<month<<" is invalid"<<endl;
         }
     }
-    string get_month()
+    short get_month()
     {
         return _month;
     }
     void set_year(short year)
     {
-        _year=to_string(year);
+        _year=year;
     }
-    string get_year()
+    short get_year()
     {
         return _year;
     }
     void get_date()
     {
-        string day=get_day();
-        string month=get_month();
-        string year=get_year();
-        if (day=="" || month=="" || year=="")
-        {
-            cout<<"there is no valid date yet"<<endl;
-        }
-        else
-        {
-            cout<<day<<"/"<<month<<"/"<<year<<endl;   
-        }
+        cout<<get_day()<<"/"<<get_month()<<"/"<<get_year()<<endl;
     }
 };
