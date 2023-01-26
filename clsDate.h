@@ -7,9 +7,9 @@ using namespace std;
 class clsDate
 {
 private:
-    short _day;
-    short _month;
-    short _year;
+    short _day=1;
+    short _month=1;
+    short _year=1900;
 public:
     clsDate()
     {
@@ -139,5 +139,22 @@ public:
         }
         days+=current_day;
         return days;
+    }
+    bool isDateValid()
+    {
+        short month=get_month();
+        short day=get_day();
+        vector <short> Days_in_Months={31,28,31,30,31,30,31,31,30,31,30,31};
+        if (month<0 || month>12)
+        {
+            cout<<"month not valid"<<endl;
+            return false;
+        }
+        if (day<0 || day>Days_in_Months[month-1])
+        {
+            cout<<"day not valid"<<endl;
+            return false;
+        }
+        return true;
     }
 };
