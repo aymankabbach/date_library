@@ -157,4 +157,13 @@ public:
         }
         return true;
     }
+    static void get_current_date()
+    {
+        time_t theTime = time(NULL);
+        struct tm *aTime = localtime(&theTime);
+        short day = aTime->tm_mday;
+        short month = aTime->tm_mon + 1;
+        short year = aTime->tm_year + 1900;
+        cout<<day<<"/"<<month<<"/"<<year<<endl;
+    }
 };
