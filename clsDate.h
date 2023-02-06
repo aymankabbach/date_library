@@ -180,5 +180,11 @@ public:
         short month=aTime->tm_mon + 1;
         return month;
     }
-    
+    static short get_year()
+    {
+        time_t theTime = time(NULL);
+        struct tm *aTime = localtime(&theTime);
+        short year = aTime->tm_year + 1900;
+        return year;
+    }
 };
