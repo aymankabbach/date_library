@@ -173,4 +173,12 @@ public:
         short day = aTime->tm_mday;
         return day;
     }
+    static short get_month()
+    {
+        time_t theTime = time(NULL);
+        struct tm *aTime = localtime(&theTime);
+        short month=aTime->tm_mon + 1;
+        return month;
+    }
+    
 };
