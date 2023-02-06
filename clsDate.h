@@ -166,21 +166,21 @@ public:
         short year = aTime->tm_year + 1900;
         cout<<day<<"/"<<month<<"/"<<year<<endl;
     }
-    static short get_day()
+    static short get_current_day()
     {
         time_t theTime = time(NULL);
         struct tm *aTime = localtime(&theTime);
         short day = aTime->tm_mday;
         return day;
     }
-    static short get_month()
+    static short get_current_month()
     {
         time_t theTime = time(NULL);
         struct tm *aTime = localtime(&theTime);
         short month=aTime->tm_mon + 1;
         return month;
     }
-    static short get_year()
+    static short get_current_year()
     {
         time_t theTime = time(NULL);
         struct tm *aTime = localtime(&theTime);
